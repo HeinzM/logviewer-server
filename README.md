@@ -5,7 +5,7 @@ Nodejs + express + socket.io
 
 ## Installieren der Requirements
 ```bash
-npm install --save --save-exact `cat requirements.txt`
+npm install --save --save-exact 
 ```
 
 ## Starten der Serverinstanz
