@@ -1,7 +1,16 @@
 const express = require('express');
+const cors = require("cors");
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:3001',
+  optionsSuccessStatus: 200,
+}))
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: ['http://localhost:3001'],
+  },
+});
 const fs = require('fs');
 
 // Stammverzeichnis zum durchsuchen
@@ -29,7 +38,7 @@ io.on('connection', (socket) => {
     const fileNames = fs.readdirSync(directoryPath);
     const filesContent = {};
 
-    filesNames.forEach((fileName) => {
+    fileNames.forEach((fileName) => {
       const filePath = `${directoryPath}/${fileName}`;
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       filesContent[fileName] = fileContent;
